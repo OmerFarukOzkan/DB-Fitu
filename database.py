@@ -3,10 +3,13 @@ import psycopg2
 from passlib.handlers.sha2_crypt import sha512_crypt
 from flask import current_app
 from flask_login import UserMixin
+import os
+
+db_url = os.environ.get('DATABASE_URL')
 
 class Database():
     def __init__(self):
-        self.connection = psycopg2.connect(user="postgres", password="database1",database="dbfitu")
+        self.connection = psycopg2.connect(db_url, sslmode='require')
         self.cur = self.connection.cursor()
 
         self.users = {}
