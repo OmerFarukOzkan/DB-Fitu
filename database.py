@@ -180,8 +180,6 @@ class Database():
                 query = "SELECT * FROM exercise order by ex_id"
                 cursor.execute(query)
                 all_exercises = cursor.fetchall()
-        for i in all_exercises:
-            print(i[3])
         return all_exercises
 
 #Foods

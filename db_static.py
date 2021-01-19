@@ -317,7 +317,7 @@ def initt():
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Salmon','35','salmon.png','Salmon is high in both protein and omega-3 fatty acids, making it a good choice for a healthy weight loss diet.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Salmon','120','salmon.png','Salmon is high in both protein and omega-3 fatty acids, making it a good choice for a healthy weight loss diet.
     ');'''
     cursor.execute(insert)
     connection.commit()
@@ -327,42 +327,42 @@ def initt():
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Lean Beef','35','leanbeef.png','Eating unprocessed lean meat is an excellent way to increase your protein intake. Replacing some of the carbs or fat in your diet with protein could make it easier for you to lose excess fat.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Lean Beef','135','leanbeef.png','Eating unprocessed lean meat is an excellent way to increase your protein intake. Replacing some of the carbs or fat in your diet with protein could make it easier for you to lose excess fat.
     ');'''
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Boiled Potatoes','35','boiledpatato.png','Boiled potatoes are among the most filling foods. They’re particularly good at reducing your appetite, potentially suppressing your food intake later in the day.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Boiled Potatoes','110','boiledpatato.png','Boiled potatoes are among the most filling foods. They’re particularly good at reducing your appetite, potentially suppressing your food intake later in the day.
     ');'''
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Tuna','35','tuna.png','Tuna is an excellent, lean source of high-quality protein. Replacing other macronutrients, such as carbs or fat, with protein is an effective weight loss strategy on a calorie-restricted diet.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Tuna','95','tuna.png','Tuna is an excellent, lean source of high-quality protein. Replacing other macronutrients, such as carbs or fat, with protein is an effective weight loss strategy on a calorie-restricted diet.
     ');'''
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Beans','35','beans.png','Beans and legumes are a good addition to your weight loss diet. They’re both high in protein and fiber, contributing to feelings of fullness and a lower calorie intake.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Beans','40','beans.png','Beans and legumes are a good addition to your weight loss diet. They’re both high in protein and fiber, contributing to feelings of fullness and a lower calorie intake.
     ');'''
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Soups','35','soups.png','Soups can be an effective part of a weight loss diet. Their high water content makes them very filling. However, try to avoid creamy or oily soups.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Soups','45','soups.png','Soups can be an effective part of a weight loss diet. Their high water content makes them very filling. However, try to avoid creamy or oily soups.
     ');'''
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Cottage Cheese','35','cottagecheese.png','Eating lean dairy products, such as cottage cheese, is one of the best ways to get more protein without significantly increasing your calorie intake.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Cottage Cheese','70','cottagecheese.png','Eating lean dairy products, such as cottage cheese, is one of the best ways to get more protein without significantly increasing your calorie intake.
     ');'''
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Avocados','35','avocado.png','Avocados are a good example of a healthy fat source you can include in your diet while trying to lose weight. Just make sure to keep your intake moderate.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Avocados','25','avocado.png','Avocados are a good example of a healthy fat source you can include in your diet while trying to lose weight. Just make sure to keep your intake moderate.
     ');'''
     cursor.execute(insert)
     connection.commit()
 
-    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Chili Pepper','35','chilipeppers.png','Eating spicy foods that contain chili peppers may reduce your appetite temporarily and even increase fat burning. However, tolerance seems to build up in those who eat chili regularly.
+    insert = '''INSERT INTO food(food_name,calorie,photo,content) VALUES ('Chili Pepper','20','chilipeppers.png','Eating spicy foods that contain chili peppers may reduce your appetite temporarily and even increase fat burning. However, tolerance seems to build up in those who eat chili regularly.
     ');'''
     cursor.execute(insert)
     connection.commit()

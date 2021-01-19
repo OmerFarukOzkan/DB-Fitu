@@ -110,9 +110,11 @@ def user_update():
         cweight = request.form['weight']
         if cweight:
             session['weight'] = cweight
-        if 'password' in request.form:
+        if len(request.form['password']):
             cpassword = pbkdf2_sha256.hash(request.form['password'])
             session['password'] = cpassword
+        else:
+            cpassword = ""
         db.update_user(cur_id,cname,cpassword,cheight,cweight)
         return redirect(url_for('user_profile'))
     return render_template('update.html',is_user = 1)
@@ -193,9 +195,6 @@ def list_all_exercises():
     image_paths =[]
     for i in exercises:
         image_paths.append(url_for('static', filename=i[3]))
-
-    print(image_paths)
-    #print(exercises)
     return render_template('exercises.html',exercises = exercises,image_paths = image_paths,create_mode = 0)
 
 def list_all_foods():
