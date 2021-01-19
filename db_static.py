@@ -8,7 +8,7 @@ def initt():
         password VARCHAR(300) NOT NULL,
         height INTEGER NOT NULL,
         point INTEGER,
-        CHECK (point>=1 and point<=5),
+        CHECK (point>=0 and point<=5),
         weight FLOAT NOT NULL
     );'''
     cursor.execute(query)
