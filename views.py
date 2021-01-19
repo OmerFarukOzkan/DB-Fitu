@@ -91,7 +91,13 @@ def trainer_update():
         db = current_app.config["db"]
         cur_id = session['trainer_id']
         cname = request.form['trainer_name']
-        cpassword = pbkdf2_sha256.hash(request.form['password'])
+        if cname:
+            session['trainer_name'] = cname
+        if len(request.form['password']): 
+            cpassword = pbkdf2_sha256.hash(request.form['password'])
+            session['password'] = cpassword
+        else:
+            cpassword = ""
         db.update_trainer(cur_id,cname,cpassword)
         return redirect(url_for('trainer_profile'))
     return render_template('update.html',is_user = 0)
