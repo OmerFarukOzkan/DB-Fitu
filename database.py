@@ -177,7 +177,7 @@ class Database():
     def get_exercises(self):
         if self.last_exercise_key is not None:  
             with self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                query = "SELECT * FROM exercise"
+                query = "SELECT * FROM exercise order by ex_id"
                 cursor.execute(query)
                 all_exercises = cursor.fetchall()
         for i in all_exercises:
