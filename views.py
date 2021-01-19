@@ -110,8 +110,8 @@ def user_update():
         cweight = request.form['weight']
         if cweight:
             session['weight'] = cweight
-        cpassword = pbkdf2_sha256.hash(request.form['password'])
-        if cpassword:
+        if 'password' in request.form:
+            cpassword = pbkdf2_sha256.hash(request.form['password'])
             session['password'] = cpassword
         db.update_user(cur_id,cname,cpassword,cheight,cweight)
         return redirect(url_for('user_profile'))
