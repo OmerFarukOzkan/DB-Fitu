@@ -351,3 +351,5 @@ def initt():
     ');'''
     cursor.execute(insert)
     connection.commit()
+
+initt()
