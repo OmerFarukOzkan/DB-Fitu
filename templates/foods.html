@@ -1,0 +1,52 @@
+{%extends "layout.html"%}
+
+
+{%block content%}
+<section class="py-5 text-center container">
+    <p class="lead text-muted">Here you can see the visual representation of diet foods. If you are registered user you can click the button and add it to your menu list.</p>
+        <p>
+    <p class="lead text-muted">Sum of all food's calorie :{{sum_of_cal[0]}}.</p>
+        <p>
+  {%if session.logged_in%} 
+  <a class = "button is-warning is-inverted" href = "{{url_for('create_food_list')}}"><button>Create New Food List</button></a>
+    {%if create_mode %}
+      <h3>Please select your food from list.</h3>
+      <a class = "button is-warning is-inverted" href = "{{url_for('food_list_update',mlist_id = food_list_id)}}"><button>Finish Food List</button></a><br>
+      {% if error %}
+          <b style = "color:darkturquoise">{{error}}</b>
+      {%endif%}
+    {%endif%}
+  {%else%}
+  <a class = "button is-warning is-inverted" href = "{{url_for('login_user')}}"><button>Create New Food List</button></a>
+  {%endif%}
+
+</section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {%for p in foods%}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src= "{{image_paths[p[0]-1]}}"  width="100%" height="250" alt="logo" class = "logo">            
+            <div class="card-body">
+              <p class="card-text">Food Name: {{p[1]}}</p>
+              <p class="card-text">Calorie: {{p[2]}}</p>
+              <p class="card-text">Description: {{p[4]}}</p>
+              {%if session.logged_in and create_mode%}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href = "{{url_for('add_food_to_list',id = p[0],food_list_id = food_list_id,number_of_food = number_of_food)}}"><button type="button" class="btn btn-sm btn-outline-secondary">Add My Food List</button></a>
+                </div>
+              </div>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+  </div>
+
+</main>
+{%endblock%}

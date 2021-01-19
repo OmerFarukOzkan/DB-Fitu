@@ -2,8 +2,12 @@
 
 
 {%block content%}
-                  <div class ="has-text-centered" >
-                    <h3>Sign Up Page</h3>
+                <div class = "container">
+                  <div class = "col-md-4 offset-md-4">
+                        <h3>Sign Up Page</h3>
+                        {%if error %}
+                            <b style = "color: darkmagenta">{{error}}</b>
+                        {%endif%}
                     <form px-4name="signUp" action="" method="POST">
                        <h3>Enter your information to register </h3> <br> <br>
                        
@@ -18,15 +22,16 @@
                
                        <b for="password">Password:</b></br>
                        <input type="password" id="password" name="password" required="required" placeholder ="at least 4 characters"></br><br>
-               
+                      
                        <b for="password">Password(again):</b><br>
-                       <input type="password" id="password" name="password"  required="required"></br><br>
+                       <input type="password" id="password" name="passwordag"  required="required"></br><br>
 
                        <button type="submit" class="btn btn-primary btn-lg ">
                          enroll
                        </button>
                      </form> 
-                 </div>
+                  </div>
+                </div>
             </main>
         </div>
     </div>

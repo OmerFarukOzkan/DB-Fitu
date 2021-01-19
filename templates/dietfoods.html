@@ -4,12 +4,12 @@
 {%block content%}
 <section class="py-5 text-center container">
   {%if session.logged_in%}
-  <a class = "button is-warning is-inverted" href = "{{url_for('list_all_foods_to_create')}}">Create New Menu List</a>
+  <a class = "button is-warning is-inverted" href = "{{url_for('list_all_foods_to_create')}}"><button>Create New Menu List</button></a>
   {%if create_mode %}
       <h3>Please select your food from list.</h3>
     {%endif%}
   {%else%}
-  <a class = "button is-warning is-inverted" href = "{{url_for('login_user')}}">Create New Menu List</a>
+  <a class = "button is-warning is-inverted" href = "{{url_for('login_user')}}"><button>Create New Menu List</button></a>
   {%endif%}
 </section>
   <div class="album py-5 bg-light">

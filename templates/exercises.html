@@ -3,14 +3,18 @@
 
 {%block content%}
 <section class="py-5 text-center container">
-  {%if session.logged_in%}
-  <a class = "button is-warning is-inverted" href = "{{url_for('create_exercise_list')}}">Create New Exercise List</a>
+  <p class="lead text-muted">Here you can see the visual representation of fitness exercises. If you are registered user you can click the button and add it to your exercise list.</p>
+  {%if session.logged_in%} 
+  <a class = "button is-warning is-inverted" href = "{{url_for('create_exercise_list')}}"><button>Create New Exercise List</button></a>
     {%if create_mode %}
       <h3>Please select your exercise from list.</h3>
-      <a class = "button is-warning is-inverted" href = "{{url_for('exercise_list_update',elist_id = exer_list_id)}}">Finish Exercise List</a>
+      <a class = "button is-warning is-inverted" href = "{{url_for('exercise_list_update',elist_id = exer_list_id)}}"><button>Finish Exercise List</button></a><br>
+      {% if error %}
+          <b style = "color:darkturquoise">{{error}}</b>
+      {%endif%}
     {%endif%}
   {%else%}
-  <a class = "button is-warning is-inverted" href = "{{url_for('login_user')}}">Create New Exercise List</a>
+  <a class = "button is-warning is-inverted" href = "{{url_for('login_user')}}"><button>Create New Exercise List</button></a>
   {%endif%}
 
 </section>
@@ -21,10 +25,10 @@
         {%for p in exercises%}
         <div class="col">
           <div class="card shadow-sm">
-            <img src= "{{image_paths[p[0]-1]}}"  width="100%" height="250" alt="logo" class = "logo">            
+            <img src= "{{image_paths[p[0]-23]}}"  width="100%" height="250" alt="logo" class = "logo">            
             <div class="card-body">
-              <p class="card-text">Exercise Name: {{p[2]}}</p>
-              <p class="card-text">Body Part: {{p[1]}}</p>
+              <p class="card-text">Exercise Name:{{p[2]}}</p>
+              <p class="card-text">Body Part: {{p[1]}}</p>  
               <p class="card-text">Description: {{p[4]}}</p>
               {%if session.logged_in and create_mode%}
               <div class="d-flex justify-content-between align-items-center">

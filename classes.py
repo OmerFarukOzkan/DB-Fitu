@@ -24,17 +24,16 @@ class Trainer:
     def __init__(self, trainer_id, trainer_name, password, score, age, gender, count, experience_year):
         self.trainer_id = trainer_id
         self.trainer_name = trainer_name
-        self.password
+        self.password = password
         self.score = score
         self.age = age
         self.gender = gender
         self.count = count
         self.experience_year = experience_year
-
+        
 class User(UserMixin):
     def __init__(self, user_id, trainer_id, user_name, password, height, weight, point):
         self.user_id = user_id
-        self.trainer_id = trainer_id
         self.user_name = user_name
         self.password = password
         self.height = height
@@ -46,10 +45,10 @@ class User(UserMixin):
         return self.active
         
 class Comment:
-    def __init__(self, comment_id, user_id, type, content):
+    def __init__(self, comment_id, user_id, author, content):
         self.comment_id = comment_id
         self.user_id = user_id
-        self.type = type
+        self.author = author
         self.content = content
 class Menu_list:
     def __init__(self, mlist_id, user_id, numb_of_food):

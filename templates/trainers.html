@@ -1,0 +1,84 @@
+{%extends "layout.html"%}
+
+
+{%block content%}
+<script>
+    function displayDivDemo(val){
+        for (let el of document.getElementsByClassName('b1')){
+        el.style.display = val.value == 1 ? 'block' : 'none';
+}
+for (let el of document.getElementsByClassName('b2')){
+     el.style.display = val.value == 2 ? 'block' : 'none';
+}
+for (let el of document.getElementsByClassName('b3')){
+     el.style.display = val.value == 3 ? 'block' : 'none';
+}
+for (let el of document.getElementsByClassName('b4')){
+     el.style.display = val.value == 4 ? 'block' : 'none';
+}
+for (let el of document.getElementsByClassName('b5')){
+     el.style.display = val.value == 5 ? 'block' : 'none';
+}
+    }
+ </script>
+<section class="py-5 text-center container">
+    <p class="lead text-muted">Here you can see the fitness trainers. If you are registered user you can click the button and follow the trainer  .</p>
+</section>
+<section class="py-5 text-center container">
+  <p class="lead text-muted">Average of trainer's age : {{ "%.1f"|format(avg_age[0]) }}  .</p>
+</section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {%for p in trainers%}
+        <div class="col">
+         <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">Id: {{p[0]}}</p>
+              <p class="card-text">Name: {{p[1]}}</p>
+              <p class="card-text">Score: {{p[3]}}</p>
+              <p class="card-text">Age:  {{p[4]}}</p>
+              <p class="card-text">Gender: {{p[5]}}</p>
+              <p class="card-text">Follower: {{p[6]}}</p>
+              <p class="card-text">Experience Year: {{p[7]}}</p>
+              {% if have_trainer == 0 %}
+              <select onchange="displayDivDemo(this)" class="form-select" id="floatingSelect" aria-label="Floating label select example" name ="point">
+                <option selected>Choose Point</option>
+                <option value="1"> 1</option>
+                <option value="2"> 2</option>
+                <option value="3"> 3</option>
+                <option value="4"> 4</option>
+                <option value="5"> 5</option>
+              </select>
+              <br>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a style="display:none;" class = "b1" href = "{{url_for('add_trainer_to_user',trainer_id = p[0],user_id = user.user_id,point = 1)}}">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Like Trainer</button>
+                  </a>
+                  <a  style="display:none;" class = "b2" href = "{{url_for('add_trainer_to_user',trainer_id = p[0],user_id = user.user_id,point = 2)}}">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Like Trainer</button>
+                </a>
+                <a  style="display:none;" class = "b3" href = "{{url_for('add_trainer_to_user',trainer_id = p[0],user_id = user.user_id,point = 3)}}">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Like Trainer</button>
+                </a>
+                <a style="display:none;" class = "b4" href = "{{url_for('add_trainer_to_user',trainer_id = p[0],user_id = user.user_id,point = 4)}}">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Like Trainer</button>
+                </a>
+                <a  style="display:none;" class = "b5" href = "{{url_for('add_trainer_to_user',trainer_id = p[0],user_id = user.user_id,point = 5)}}">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Like Trainer</button>
+                </a>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+  </div>
+
+</main>
+{%endblock%}
