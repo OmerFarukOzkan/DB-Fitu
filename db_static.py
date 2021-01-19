@@ -220,7 +220,7 @@ def initt():
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Back', 'Front Lat Pullover', 'fronlatpullover.png', 'Although the picture does not show this, you may need to use the
+    query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Back', 'Front Lat Pullover', 'frontlatpullover.png', 'Although the picture does not show this, you may need to use the
     supplied length of chain on this exercise. Otherwise, the weight stack
     can easily “top out” and damage a pulley. Attach the chain to the high
     pulley, and then attach the straight bar to the end of the chain. Grab
