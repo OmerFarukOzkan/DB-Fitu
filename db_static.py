@@ -1,5 +1,5 @@
 import psycopg2
-connection = psycopg2.connect(user="postgres", password="database1",database="dbfitu")
+connection = psycopg2.connect("postgres://xifgxuynwnxfjq:5cf0e94393316b2a2ea6717aaf0198e5ac7733e81869d4932bab8f837d015df5@ec2-23-23-88-216.compute-1.amazonaws.com:5432/d10vn8r7hs5nr4",sslmode = 'require')    
 cursor = connection.cursor()
 def initt():
     query = '''CREATE TABLE trainer_rel(
