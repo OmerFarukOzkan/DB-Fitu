@@ -5,7 +5,6 @@ from flask_login import LoginManager,current_user
 from database import Database
 from flask import current_app
 from flask_login import UserMixin
-from db_static import initt
 import os
 
 lm = LoginManager()
