@@ -190,7 +190,7 @@ def initt():
 
     query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Shoulder', 'Shrugs', 'shrugs.png', 'Attach the straight bar to the low pulley (on some models, this may
     be at the front of the leg extension lever). Stand on the foot plate
-    and hold the bar at arms’ length. “Shrug” your shoulders upward
+    and hold the bar at arms’ length. Shrug your shoulders upward
     and rearward. Lower slowly.' );''''
     cursor.execute(query)
     connection.commit()
