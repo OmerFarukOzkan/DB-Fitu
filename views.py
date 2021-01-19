@@ -102,9 +102,17 @@ def user_update():
         db = current_app.config["db"]
         cur_id = session['user_id']
         cname = request.form['user_name']
+        if cname:
+            session['user_name'] = cname
         cheight = request.form['height']
+        if cheight:
+            session['height'] = cheight
         cweight = request.form['weight']
+        if cweight:
+            session['weight'] = cweight
         cpassword = pbkdf2_sha256.hash(request.form['password'])
+        if cpassword:
+            session['password'] = cpassword
         db.update_user(cur_id,cname,cpassword,cheight,cweight)
         return redirect(url_for('user_profile'))
     return render_template('update.html',is_user = 1)
