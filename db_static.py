@@ -184,7 +184,7 @@ def initt():
     cursor.execute(query)
     connection.commit()
 
-    qeuery = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Shoulder', 'Cable Lateral Raise', 'cablelateralraise.png', 'Adjust the Functional Training Arms to a low position, about shoulder
+    query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Shoulder', 'Cable Lateral Raise', 'cablelateralraise.png', 'Adjust the Functional Training Arms to a low position, about shoulder
     width apart. Sit upright on the seat and grab the cable handles with a
     neutral grip. While keeping your arms straight, raise your hands outward and upward. Lower slowly.' );'''
     cursor.execute(query)
@@ -251,6 +251,12 @@ def initt():
     cursor.execute(query)
     connection.commit()
 
+    query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) VALUES('Leg','Glute Kick','glutekick.png','Stand facing the machine and attach the ankle strap to one leg. Stand and
+    grab the seat back, or press arm for support, pelvis tilted forward. Extend
+    the hip and pull your leg backward.' );'''
+    query.execute(query)
+    connection.commit()
+
     query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Arm', 'Triceps Kickback', 'tricepskickback.png', 'Attach a single handle to a Functional Training Arm and adjust it to
     a low position. Stand beside the machine in front of the Functional
     Training Arm. Bend at the waist to near horizontal. Grab the single
@@ -263,6 +269,15 @@ def initt():
     position. Attach the ab strap to the cable end located behind your head.
     Drape the ab strap over your shoulders and hold it in place. Use your
     abdominal muscles to crunch forward and downward. Return slowly.' );'''
+    cursor.execute(query)
+    connection.commit()
+
+    query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Leg', 'Leg Press', 'legpress.png', 'This exercise can only be performed if you have purchased the optional
+    leg press attachment. Adjust the seat back to a comfortable position. You should try to get as close as possible to the foot plate, yet
+    not so close that your knees are against your chest, forcing your knees
+    outward. Place your feet squarely on the foot plates and press outward
+    to full extension. Be careful not to lock out your knees! Locking your
+    knees is extending a bit too far and can result in injury. Return slowly.' );'''
     cursor.execute(query)
     connection.commit()
 

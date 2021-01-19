@@ -177,9 +177,11 @@ class Database():
     def get_exercises(self):
         if self.last_exercise_key is not None:  
             with self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                query = "SELECT * FROM exercise ORDER BY ex_id"
+                query = "SELECT * FROM exercise ORDER BY exercise_name"
                 cursor.execute(query)
                 all_exercises = cursor.fetchall()
+        for i in all_exercises:
+            print(i[3])
         return all_exercises
 
 #Foods
@@ -289,7 +291,6 @@ class Database():
         return x[0]
     def check_exercise(self,exl_id,id):
         with self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-            print(123)
             query = "SELECT EXISTS (SELECT true FROM exer_rel WHERE elist_id = %s and ex_id = %s)"
             cursor.execute(query,(exl_id,id))
             x = cursor.fetchone()

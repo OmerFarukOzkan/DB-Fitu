@@ -185,6 +185,9 @@ def list_all_exercises():
     image_paths =[]
     for i in exercises:
         image_paths.append(url_for('static', filename=i[3]))
+        #print(i[3])
+    #print(image_paths)
+    #print(exercises)
     return render_template('exercises.html',exercises = exercises,image_paths = image_paths,create_mode = 0)
 
 def list_all_foods():
