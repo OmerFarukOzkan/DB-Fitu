@@ -71,10 +71,10 @@ integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKm
   <input type="password" id="password" name="password" placeholder ="at least 4 characters"></br><br>
   
   <b for="height">Height:</b></br>
-  <input type="height" id="height" name="height"></br><br>
+  <input type="number" min = "0" max = "250" id="height" name="height"></br><br>
   
   <b for="weight">Weight:</b></br>
-  <input type="weight" id="weight" name="weight"></br><br>
+  <input type="number" min = "0" max = "250" id="weight" name="weight"></br><br>
 
 
   <button type="submit" class="btn btn-primary btn-lg " href = "{{url_for('user_update')}}">
