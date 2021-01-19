@@ -5,8 +5,9 @@ from flask import current_app
 from flask_login import UserMixin
 
 class Database():
-    def __init__(self):
-        self.connection = psycopg2.connect(user="postgres", password="database1",database="dbfitu")
+    def __init__(self,database_url):
+        self.connection = psycopg2.connect(database_url, sslmode = 'require')
+        
         self.cur = self.connection.cursor()
 
         self.users = {}

@@ -6,6 +6,7 @@ from database import Database
 from flask import current_app
 from flask_login import UserMixin
 from db_static import initt
+import os
 
 lm = LoginManager()
 
@@ -19,7 +20,6 @@ def create_app():
 
     app.secret_key = 'hello'
 
-    initt()
     app.add_url_rule("/",view_func=views.home_page)
     app.add_url_rule("/login_user", view_func = views.login_user, methods = ["GET","POST"])
     app.add_url_rule("/sign_up", view_func = views.sign_up, methods = ["GET","POST"])
@@ -51,7 +51,7 @@ def create_app():
     lm.init_app(app)
     lm.login_view = "login_user"
 
-    db = Database()
+    db = Database(os.environ.get("DATABASE_URL"))
 
     app.config["db"] = db
     

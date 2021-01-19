@@ -2,17 +2,40 @@ import psycopg2
 connection = psycopg2.connect("postgres://xifgxuynwnxfjq:5cf0e94393316b2a2ea6717aaf0198e5ac7733e81869d4932bab8f837d015df5@ec2-23-23-88-216.compute-1.amazonaws.com:5432/d10vn8r7hs5nr4",sslmode = 'require')    
 cursor = connection.cursor()
 def initt():
-    query = '''CREATE TABLE trainer_rel(
-        user_id PRIMARY KEY INTEGER,
-        trainer_id INTEGER NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
-        FOREIGN KEY (trainer_id) REFERENCES trainer(trainer_id) ON DELETE CASCADE ON UPDATE CASCADE
+    query = '''CREATE TABLE IF NOT EXISTS users(
+        user_id SERIAL PRIMARY KEY,
+        user_name VARCHAR(30) UNIQUE NOT NULL,
+        password VARCHAR(300) NOT NULL,
+        height INTEGER NOT NULL,
+        point INTEGER,
+        CHECK (point>=1 and point<=5),
+        weight FLOAT NOT NULL
+    );'''
+    cursor.execute(query)
+    connection.commit()
+        
+    query = '''CREATE TABLE IF NOT EXISTS Food(
+        food_id SERIAL PRIMARY KEY,
+        food_name VARCHAR(30) NOT NULL,
+        calorie INTEGER NOT NULL,
+        photo VARCHAR(30) NOT NULL,
+        content VARCHAR(300) NOT NULL
     );'''
     cursor.execute(query)
     connection.commit()
 
+    query = '''CREATE TABLE IF NOT EXISTS Exercise(
+        ex_id SERIAL PRIMARY KEY, 
+        body_part VARCHAR(30) NOT NULL,
+        exercise_name VARCHAR(50) NOT NULL,
+        photo VARCHAR(30) NOT NULL,
+        content VARCHAR(1000) NOT NULL
+    );'''
+    cursor.execute(query)
+    connection.commit()    
 
-    query = '''CREATE TABLE Comment(
+
+    query = '''CREATE TABLE IF NOT EXISTS Comment(
         comment_id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL,
         author VARCHAR(30),
@@ -22,7 +45,7 @@ def initt():
     cursor.execute(query)
     connection.commit()
 
-    query = '''CREATE TABLE Trainer(
+    query = '''CREATE TABLE IF NOT EXISTS Trainer(
         trainer_id SERIAL PRIMARY KEY,
         trainer_name VARCHAR(30) UNIQUE NOT NULL,
         password VARCHAR(250) UNIQUE NOT NULL,
@@ -35,20 +58,25 @@ def initt():
     cursor.execute(query)
     connection.commit()
 
-
-    query = '''CREATE TABLE users(
-        user_id SERIAL PRIMARY KEY,
-        user_name VARCHAR(30) UNIQUE NOT NULL,
-        password VARCHAR(300) NOT NULL,
-        height INTEGER NOT NULL,
-        point INTEGER,
-        CHECK (point>=1 and point<=5),
-        weight FLOAT NOT NULL,
+    query = '''CREATE TABLE IF NOT EXISTS trainer_rel(
+    user_id INTEGER PRIMARY KEY ,
+    trainer_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (trainer_id) REFERENCES trainer(trainer_id) ON DELETE CASCADE ON UPDATE CASCADE
     );'''
     cursor.execute(query)
     connection.commit()
 
-    query = '''CREATE TABLE Exer_rel(
+    query = '''CREATE TABLE IF NOT EXISTS Exer_list(
+        elist_id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        numb_of_ex INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+    );'''
+    cursor.execute(query)
+    connection.commit()   
+
+    query = '''CREATE TABLE IF NOT EXISTS Exer_rel(
         elist_id INTEGER NOT NULL,
         ex_id INTEGER NOT NULL,
         FOREIGN KEY (elist_id) REFERENCES Exer_list(elist_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -56,17 +84,9 @@ def initt():
     );'''
     cursor.execute(query)
     connection.commit()
+ 
 
-    query = '''CREATE TABLE Exer_list(
-        elist_id SERIAL PRIMARY KEY,
-        user_id INTEGER NOT NULL,
-        numb_of_ex INTEGER NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-    );'''
-    cursor.execute(query)
-    connection.commit()    
-
-    query = '''CREATE TABLE Menu_list(
+    query = '''CREATE TABLE IF NOT EXISTS Menu_list(
         mlist_id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL,
         numb_of_food INTEGER NOT NULL,
@@ -75,7 +95,7 @@ def initt():
     cursor.execute(query)
     connection.commit()
     
-    query = '''CREATE TABLE Food_rel(
+    query = '''CREATE TABLE IF NOT EXISTS Food_rel(
         food_id INTEGER NOT NULL,
         mlist_id INTEGER NOT NULL,
         FOREIGN KEY (food_id) REFERENCES Food(food_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -83,64 +103,46 @@ def initt():
     );'''
     cursor.execute(query)
     connection.commit()
-    
-    query = '''CREATE TABLE Food(
-        food_id SERIAL PRIMARY KEY,
-        food_name VARCHAR(30) NOT NULL,
-        calorie INTEGER NOT NULL,
-        photo VARCHAR(30) NOT NULL,
-        content VARCHAR(300) NOT NULL
-    );'''
-    cursor.execute(query)
-    connection.commit()
-
-    query = '''CREATE TABLE Exercise(
-        ex_id SERIAL PRIMARY KEY, 
-        body_part VARCHAR(30) NOT NULL,
-        exercise_name VARCHAR(50) NOT NULL,
-        photo VARCHAR(30) NOT NULL,
-        content VARCHAR(1000) NOT NULL
-    );'''
-    cursor.execute(query)
-    connection.commit()    
 
 
-    query = '''INSERT INTO trainer VALUES(3,'Erce Can Bekture','$pbkdf2-sha256$29000$1lorxdjbe48RAiCEcI6R8g$bdDWS9JFYN4Gga7B6GOo3.9VvbQjA.C70SPX8Xf90gg',
+
+
+    query = '''INSERT INTO trainer(trainer_name,password,score,age,gender,count,experience_year) VALUES('Erce Can Bekture','$pbkdf2-sha256$29000$1lorxdjbe48RAiCEcI6R8g$bdDWS9JFYN4Gga7B6GOo3.9VvbQjA.C70SPX8Xf90gg',
     0.0,20,'Male',0,1);'''
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO trainer VALUES(4,'Orhan Yılmaz','$pbkdf2-sha256$29000$5hwDQMhZK8XYmxMiRGjNGQ$ffOlYGbatNOBJP8VjtFaslYTFENCxV1lQVu0iVD3M7k',
+    query = '''INSERT INTO trainer(trainer_name,password,score,age,gender,count,experience_year)  VALUES('Orhan Yılmaz','$pbkdf2-sha256$29000$5hwDQMhZK8XYmxMiRGjNGQ$ffOlYGbatNOBJP8VjtFaslYTFENCxV1lQVu0iVD3M7k',
     0.0,32,'Male',0,13);'''
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO trainer VALUES(5,'Tuğçe Çağlayan','$pbkdf2-sha256$29000$AeDcm1Nqbe1da03p3TunFA$1s0awCe/99rfl4w1Ndy.SAVDlkef4DM02OA1TMviZbw',
+    query = '''INSERT INTO trainer(trainer_name,password,score,age,gender,count,experience_year)  VALUES('Tuğçe Çağlayan','$pbkdf2-sha256$29000$AeDcm1Nqbe1da03p3TunFA$1s0awCe/99rfl4w1Ndy.SAVDlkef4DM02OA1TMviZbw',
     0.0,41,'Female',0,20);'''
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO trainer VALUES(6,'Furkan Halifeoğlu','$pbkdf2-sha256$29000$COGcU.odwxhj7P2fszam1A$Szha4E.KrZowHTE0PwanE7a8l5lAyugyvANG5rGcGnk',
+    query = '''INSERT INTO trainer(trainer_name,password,score,age,gender,count,experience_year)  VALUES('Furkan Halifeoğlu','$pbkdf2-sha256$29000$COGcU.odwxhj7P2fszam1A$Szha4E.KrZowHTE0PwanE7a8l5lAyugyvANG5rGcGnk',
     0.0,25,'Male',0,5);'''
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO trainer VALUES(7,'Berkay Türkkan','$pbkdf2-sha256$29000$LSWE8L4XQshZC8FYa40xxg$xntELIZwlB4oCxos13D8F0di9rsr25qR4hL7uRe/JNs',
+    query = '''INSERT INTO trainer(trainer_name,password,score,age,gender,count,experience_year)  VALUES('Berkay Türkkan','$pbkdf2-sha256$29000$LSWE8L4XQshZC8FYa40xxg$xntELIZwlB4oCxos13D8F0di9rsr25qR4hL7uRe/JNs',
     0.0,29,'Male',0,6);'''
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO trainer VALUES(8,'Savaş Cebeci','$pbkdf2-sha256$29000$0JozphQCQGjNubf2PmcMAQ$YgWvUjAwI7S36x5RiTXS5TyAvCCiP3EkHX6drpuy0cE',
+    query = '''INSERT INTO trainer(trainer_name,password,score,age,gender,count,experience_year)  VALUES('Savaş Cebeci','$pbkdf2-sha256$29000$0JozphQCQGjNubf2PmcMAQ$YgWvUjAwI7S36x5RiTXS5TyAvCCiP3EkHX6drpuy0cE',
     0.0,44,'Male',0,22);'''
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO trainer VALUES(9,'Testo Taylan','$pbkdf2-sha256$29000$Rsg5R6g1xnhPqRUCYGyNMQ$jkD81HPUDHf.JeGQKpzeNrguP7mR.7hkWUMpn6B9vkI',
+    query = '''INSERT INTO trainer(trainer_name,password,score,age,gender,count,experience_year)  VALUES('Testo Taylan','$pbkdf2-sha256$29000$Rsg5R6g1xnhPqRUCYGyNMQ$jkD81HPUDHf.JeGQKpzeNrguP7mR.7hkWUMpn6B9vkI',
     0.0,24,'Male',0,1);'''
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO trainer VALUES(10,'Rıza Kayaalp','$pbkdf2-sha256$29000$sNY6B2BMKUUIoZRSivF.jw$repCZuzsOwL.xUsZlS4xCsCAMhy.ZtxtE.t2f4HQfEE',
+    query = '''INSERT INTO trainer(trainer_name,password,score,age,gender,count,experience_year)  VALUES('Rıza Kayaalp','$pbkdf2-sha256$29000$sNY6B2BMKUUIoZRSivF.jw$repCZuzsOwL.xUsZlS4xCsCAMhy.ZtxtE.t2f4HQfEE',
     0.0,33,'Male',0,10);'''
     cursor.execute(query)
     connection.commit()
@@ -161,7 +163,7 @@ def initt():
     cursor.execute(query)
     connection.commit()
 
-    query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Chest', 'Stabilizing Chest Press', 'stabilizingchestpress.png', This exercise targets the chest muscles, but because it is done without back
+    query = '''INSERT INTO exercise(body_part,exercise_name,photo,content) Values('Chest', 'Stabilizing Chest Press', 'stabilizingchestpress.png', 'This exercise targets the chest muscles, but because it is done without back
     support, the core stabilizing muscles are also engaged. You will need to
     use a much lower weight than standard bench press exercises.
     Adjust the seat back to the upright position and the Functional Training Arms to chest height. Sit forward on the seat, without back support.
