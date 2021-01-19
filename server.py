@@ -50,8 +50,10 @@ def create_app():
     lm.init_app(app)
     lm.login_view = "login_user"
 
-    db = Database("postgres://xifgxuynwnxfjq:5cf0e94393316b2a2ea6717aaf0198e5ac7733e81869d4932bab8f837d015df5@ec2-23-23-88-216.compute-1.amazonaws.com:5432/d10vn8r7hs5nr4")
-    #os.environ.get("DATABASE_URL")
+    db = Database(os.environ.get("DATABASE_URL"))
+    #db = Database("postgres://xifgxuynwnxfjq:5cf0e94393316b2a2ea6717aaf0198e5ac7733e81869d4932bab8f837d015df5@ec2-23-23-88-216.compute-1.amazonaws.com:5432/d10vn8r7hs5nr4")
+
+
     app.config["db"] = db
     
     return app
